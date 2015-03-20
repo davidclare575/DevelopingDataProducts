@@ -1,22 +1,21 @@
-# This is the user-interface definition of a Shiny web application.
-# You can find out more about building applications with Shiny here:
-#
-# http://www.rstudio.com/shiny/
-#
 library(shiny)
+
 shinyUI(pageWithSidebar(
-# Application title
-headerPanel("New Application"),
-# Sidebar with a slider input for number of observations
-sidebarPanel(
-sliderInput("obs",
-"Number of observations:",
-min = 1,
-max = 1000,
-value = 500)
-),
-# Show a plot of the generated distribution
-mainPanel(
-plotOutput("distPlot")
-)
+  
+  headerPanel("Contract Vs. Facility Ambulance Determination"),
+  
+  sidebarPanel(
+    numericInput("miles", "Number of Miles:",
+                 20)),
+    selectInput("pension", "Receives Pension", choices = c("Yes", "No")),
+    selectInput("contract", "Contract Type", choices = c("None", "Schedule B", "Schedule A", "Preferred")),
+    selectInput("oxegyn", "Oxegyn Required", choices = c("Yes", "No"),
+    submitButton('Submit')),
+  
+  mainPanel(
+    h3("You should go with:")
+    verbatimTextOutput("decision"),
+    h4("It should cost this many dollars:")
+    verbatimTextOutput("cost")
+  )
 ))
